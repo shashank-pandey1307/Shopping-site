@@ -4,7 +4,6 @@ import { ArrowLeft } from 'lucide-react'
 import ProductCard from '../components/ProductCard'
 import { Product } from '../types'
 
-// Sample products data - will be replaced with API data
 const allProducts: Product[] = [
   {
     id: '1',
@@ -173,7 +172,6 @@ const Shop = () => {
     <div className="pt-20">
       <div className="section">
         <div className="max-w-7xl mx-auto">
-          {/* Go Back Button */}
           <button 
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-700 transition-all duration-200 hover:scale-105 mb-6"
@@ -182,7 +180,6 @@ const Shop = () => {
             Go Back
           </button>
 
-          {/* Page Header */}
           <div className="mb-12">
             <h1 className="text-3xl md:text-heading font-medium text-charcoal-700 mb-4">
               Shop All
@@ -192,9 +189,7 @@ const Shop = () => {
             </p>
           </div>
 
-          {/* Filters */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10 pb-6 border-b border-cream-200">
-            {/* Color Filter */}
             <div className="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0">
               <span className="text-sm text-charcoal-500 flex-shrink-0">Color:</span>
               <div className="flex space-x-2">
@@ -214,7 +209,6 @@ const Shop = () => {
               </div>
             </div>
 
-            {/* Sort */}
             <div className="flex items-center space-x-2">
               <span className="text-sm text-charcoal-500">Sort:</span>
               <select
@@ -229,14 +223,12 @@ const Shop = () => {
             </div>
           </div>
 
-          {/* Product Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
             {sortedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
 
-          {/* Empty State */}
           {sortedProducts.length === 0 && (
             <div className="text-center py-20">
               <p className="text-charcoal-400">No products found with the selected filter.</p>

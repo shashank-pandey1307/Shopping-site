@@ -31,14 +31,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link to={`/product/${product.id}`} className="group block">
       <div className="product-card rounded-sm overflow-hidden">
-        {/* Product Image */}
         <div className="aspect-[3/4] bg-cream-200 relative overflow-hidden">
           <img 
             src={product.images[0]} 
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          {/* Favorite Button */}
           <button
             onClick={handleFavoriteClick}
             className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 ${
@@ -52,7 +50,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </button>
         </div>
         
-        {/* Product Info */}
         <div className="mt-4 space-y-2">
           <h3 className="text-sm font-medium text-charcoal-700">
             {product.name}
@@ -65,7 +62,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </p>
         </div>
 
-        {/* View CTA - appears on hover */}
         <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <span className="text-xs font-medium text-charcoal-500 uppercase tracking-wider">
             View Product →

@@ -13,7 +13,6 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate form submission
     setTimeout(() => {
       setSubmitted(true)
     }, 500)
@@ -22,7 +21,6 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-cream-50 pt-10 md:pt-14 pb-16">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
-        {/* Back Link */}
         <Link 
           to="/" 
           className="inline-flex items-center gap-2 text-charcoal-400 hover:text-charcoal-600 transition-colors mb-8"
@@ -31,7 +29,6 @@ const Contact = () => {
           <span>Go Back</span>
         </Link>
 
-        {/* Header */}
         <div className="mb-10">
           <h1 className="text-3xl md:text-4xl font-medium text-charcoal-700 mb-3">
             Contact Us
@@ -42,9 +39,7 @@ const Contact = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-10">
-          {/* Contact Information */}
           <div className="space-y-6">
-            {/* Phone Numbers */}
             <div className="bg-cream-100 p-6 rounded-sm">
               <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                 Call Us
@@ -75,13 +70,11 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Social Handles */}
             <div className="bg-cream-100 p-6 rounded-sm">
               <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                 Connect With Us
               </h2>
               <div className="space-y-4">
-                {/* WhatsApp */}
                 <a 
                   href="https://wa.me/919876543210" 
                   target="_blank" 
@@ -101,7 +94,6 @@ const Contact = () => {
                   </div>
                 </a>
 
-                {/* Instagram */}
                 <a 
                   href="https://instagram.com/lemono_official" 
                   target="_blank" 
@@ -121,7 +113,6 @@ const Contact = () => {
                   </div>
                 </a>
 
-                {/* Telegram */}
                 <a 
                   href="https://t.me/lemono_official" 
                   target="_blank" 
@@ -143,7 +134,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Email & Address */}
             <div className="bg-cream-100 p-6 rounded-sm">
               <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                 Other Ways to Reach Us
@@ -187,7 +177,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Form */}
           <div>
             {submitted ? (
               <div className="bg-cream-100 p-8 rounded-sm text-center h-full flex flex-col items-center justify-center">

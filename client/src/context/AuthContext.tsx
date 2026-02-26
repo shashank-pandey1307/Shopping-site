@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [favorites, setFavorites] = useState<string[]>([])
 
-  // Load user from localStorage on mount
   useEffect(() => {
     const savedUser = localStorage.getItem('lemono_user')
     if (savedUser) {
@@ -40,7 +39,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsLoading(false)
   }, [])
 
-  // Load user's favorites
   const loadFavorites = async (userId: string) => {
     try {
       const response = await fetch(`${API_URL}/auth/favorites/${userId}`)
@@ -79,7 +77,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const loginWithGoogle = async (): Promise<{ success: boolean; error?: string }> => {
     try {
-      // For demo, simulate Google OAuth by prompting for email
       const email = prompt('Enter your Google email:')
       if (!email) return { success: false, error: 'Cancelled' }
       

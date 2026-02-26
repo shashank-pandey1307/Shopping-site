@@ -66,7 +66,6 @@ const Favorites = () => {
     <div className="pt-20 min-h-screen bg-cream-50">
       <div className="section">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
           <button 
             onClick={() => navigate('/')}
             className="flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-700 transition-all duration-200 hover:scale-105 mb-6"
@@ -93,7 +92,6 @@ const Favorites = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {favorites.map((product) => (
                 <div key={product.id} className="group bg-white border border-cream-200 rounded-sm overflow-hidden">
-                  {/* Image */}
                   <Link to={`/product/${product.id}`} className="block relative aspect-[4/5] bg-cream-100">
                     {product.images?.[0] ? (
                       <img 
@@ -106,7 +104,6 @@ const Favorites = () => {
                         No image
                       </div>
                     )}
-                    {/* Remove Button */}
                     <button
                       onClick={(e) => {
                         e.preventDefault()
@@ -119,7 +116,6 @@ const Favorites = () => {
                     </button>
                   </Link>
 
-                  {/* Details */}
                   <div className="p-4">
                     <Link to={`/product/${product.id}`}>
                       <h3 className="font-medium text-charcoal-700 hover:underline mb-1">{product.name}</h3>

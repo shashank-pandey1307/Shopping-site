@@ -6,7 +6,6 @@ const Footer = () => {
     <footer className="bg-cream-100 border-t border-cream-200">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
-          {/* Brand */}
           <div className="md:col-span-1">
             <h3 className="text-2xl font-semibold text-charcoal-700 tracking-tight mb-4">
               lemonO
@@ -16,7 +15,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Shop */}
           <div>
             <h4 className="text-sm font-semibold text-charcoal-600 uppercase tracking-wider mb-4">
               Shop
@@ -40,7 +38,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Help */}
           <div>
             <h4 className="text-sm font-semibold text-charcoal-600 uppercase tracking-wider mb-4">
               Help
@@ -64,7 +61,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
             <h4 className="text-sm font-semibold text-charcoal-600 uppercase tracking-wider mb-4">
               Legal
@@ -84,13 +80,11 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom */}
         <div className="mt-16 pt-8 border-t border-cream-200 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
           <p className="text-xs text-charcoal-400">
             © 2025 lemonO. All rights reserved.
           </p>
           
-          {/* Social Links */}
           <div className="flex items-center space-x-6">
             <a 
               href="" 
@@ -116,7 +110,6 @@ const Footer = () => {
             </a>
           </div>
 
-          {/* Contact Email */}
           <a 
             href="mailto:hello@lemono.in" 
             className="text-xs text-charcoal-400 hover:text-charcoal-600 transition-colors"

@@ -16,7 +16,6 @@ const Cart = () => {
       <div className="pt-20 min-h-screen bg-cream-50">
         <div className="section">
           <div className="max-w-2xl mx-auto text-center">
-            {/* Go Back Button */}
             <button 
               onClick={() => navigate(-1)}
               className="flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-700 transition-all duration-200 hover:scale-105 mb-8"
@@ -46,7 +45,6 @@ const Cart = () => {
     <div className="pt-20 min-h-screen bg-cream-50">
       <div className="section">
         <div className="max-w-4xl mx-auto">
-          {/* Go Back Button */}
           <button 
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-700 transition-all duration-200 hover:scale-105 mb-6"
@@ -55,7 +53,6 @@ const Cart = () => {
             Go Back
           </button>
 
-          {/* Header */}
           <div className="flex items-center justify-between mb-10">
             <h1 className="text-2xl md:text-3xl font-medium text-charcoal-700">
               Your Cart ({items.length} {items.length === 1 ? 'item' : 'items'})
@@ -69,14 +66,12 @@ const Cart = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Cart Items */}
             <div className="lg:col-span-2 space-y-6">
               {items.map((item) => (
                 <div 
                   key={`${item.product.id}-${item.size}`}
                   className="flex gap-4 md:gap-6 p-4 bg-cream-100 rounded-sm"
                 >
-                  {/* Product Image */}
                   <Link to={`/product/${item.product.id}`} className="flex-shrink-0">
                     <div className="w-24 h-28 md:w-32 md:h-40 bg-cream-200 rounded-sm overflow-hidden">
                       <img 
@@ -87,7 +82,6 @@ const Cart = () => {
                     </div>
                   </Link>
 
-                  {/* Product Details */}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <Link to={`/product/${item.product.id}`}>
@@ -103,7 +97,6 @@ const Cart = () => {
                       </p>
                     </div>
 
-                    {/* Quantity & Remove */}
                     <div className="flex items-center justify-between mt-4">
                       <div className="flex items-center space-x-3">
                         <button
@@ -135,7 +128,6 @@ const Cart = () => {
               ))}
             </div>
 
-            {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-cream-100 p-6 rounded-sm sticky top-28">
                 <h2 className="text-lg font-medium text-charcoal-700 mb-6">
@@ -167,7 +159,6 @@ const Cart = () => {
                     if (!isLoggedIn) {
                       navigate('/login', { state: { from: '/checkout', message: 'Please login to proceed with checkout' } })
                     } else {
-                      // Navigate to checkout page
                       navigate('/checkout')
                     }
                   }}

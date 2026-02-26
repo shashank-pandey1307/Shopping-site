@@ -4,9 +4,8 @@ import prisma from '../lib/prisma'
 
 const router = Router()
 
-// Get all products with optional filtering
 router.get(
-  '/',
+  '/',,
   [
     query('category').optional().isString(),
     query('color').optional().isString(),
@@ -24,13 +23,11 @@ router.get(
 
       const { category, color, inStock, sort, limit = '12', offset = '0' } = req.query
 
-      // Build where clause
       const where: Record<string, unknown> = {}
       if (category) where.category = category
       if (color) where.color = color
       if (inStock !== undefined) where.inStock = inStock === 'true'
 
-      // Build orderBy
       let orderBy: Record<string, string> = { createdAt: 'desc' }
       if (sort === 'price_asc') orderBy = { price: 'asc' }
       else if (sort === 'price_desc') orderBy = { price: 'desc' }
@@ -61,7 +58,6 @@ router.get(
   }
 )
 
-// Get single product by ID
 router.get(
   '/:id',
   [param('id').isString()],
@@ -88,7 +84,6 @@ router.get(
   }
 )
 
-// Create product (admin)
 router.post(
   '/',
   [
@@ -131,7 +126,6 @@ router.post(
   }
 )
 
-// Update product (admin)
 router.put(
   '/:id',
   [
@@ -165,7 +159,6 @@ router.put(
   }
 )
 
-// Delete product (admin)
 router.delete('/:id', async (req: Request, res: Response) => {
   try {
     await prisma.product.delete({

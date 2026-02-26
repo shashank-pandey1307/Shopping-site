@@ -4,7 +4,6 @@ import prisma from '../lib/prisma'
 
 const router = Router()
 
-// Submit contact message
 router.post(
   '/',
   [
@@ -36,7 +35,6 @@ router.post(
   }
 )
 
-// Subscribe to newsletter
 router.post(
   '/newsletter',
   [body('email').isEmail().withMessage('Valid email is required')],
@@ -49,7 +47,6 @@ router.post(
 
       const { email } = req.body
 
-      // Check if already subscribed
       const existing = await prisma.newsletterSubscription.findUnique({
         where: { email }
       })
@@ -58,7 +55,6 @@ router.post(
         if (existing.active) {
           return res.json({ message: 'You\'re already subscribed!' })
         } else {
-          // Reactivate subscription
           await prisma.newsletterSubscription.update({
             where: { email },
             data: { active: true }
@@ -79,7 +75,6 @@ router.post(
   }
 )
 
-// Get all contact messages (admin)
 router.get('/messages', async (req: Request, res: Response) => {
   try {
     const { read, limit = '20', offset = '0' } = req.query
@@ -111,7 +106,6 @@ router.get('/messages', async (req: Request, res: Response) => {
   }
 })
 
-// Mark message as read (admin)
 router.patch('/messages/:id/read', async (req: Request, res: Response) => {
   try {
     const message = await prisma.contactMessage.update({

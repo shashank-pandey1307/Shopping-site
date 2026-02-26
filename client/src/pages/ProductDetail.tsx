@@ -5,7 +5,6 @@ import { Product } from '../types'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 
-// All products data
 const allProducts: Product[] = [
   {
     id: '1',
@@ -162,7 +161,6 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0)
   const [addedToCart, setAddedToCart] = useState(false)
 
-  // Find product by id
   const product = allProducts.find(p => p.id === id) || allProducts[0]
   
   const favorited = isFavorite(product.id)
@@ -194,7 +192,6 @@ const ProductDetail = () => {
     <div className="pt-20">
       <div className="section">
         <div className="max-w-7xl mx-auto">
-          {/* Go Back Button */}
           <button 
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-700 transition-all duration-200 hover:scale-105 mb-6"
@@ -204,9 +201,7 @@ const ProductDetail = () => {
           </button>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-            {/* Product Images */}
             <div className="space-y-4">
-              {/* Main Image */}
               <div className="aspect-[4/5] bg-cream-100 rounded-sm overflow-hidden">
                 <img 
                   src={product.images[selectedImage]}
@@ -215,7 +210,6 @@ const ProductDetail = () => {
                 />
               </div>
               
-              {/* Thumbnails */}
               {product.images.length > 1 && (
                 <div className="flex space-x-3">
                   {product.images.map((image, index) => (
@@ -236,9 +230,7 @@ const ProductDetail = () => {
               )}
             </div>
 
-            {/* Product Info */}
             <div className="space-y-8">
-              {/* Title & Price */}
               <div>
                 <p className="text-xs font-medium text-charcoal-400 uppercase tracking-wider mb-2">
                   lemonO
@@ -254,12 +246,10 @@ const ProductDetail = () => {
                 </p>
               </div>
 
-              {/* Description */}
               <p className="text-charcoal-500 leading-relaxed">
                 {product.description}
               </p>
 
-              {/* Size Selector */}
               <div>
                 <p className="text-sm font-medium text-charcoal-600 mb-3">
                   Size
@@ -281,7 +271,6 @@ const ProductDetail = () => {
                 </div>
               </div>
 
-              {/* Quantity */}
               <div>
                 <p className="text-sm font-medium text-charcoal-600 mb-3">
                   Quantity
@@ -305,7 +294,6 @@ const ProductDetail = () => {
                 </div>
               </div>
 
-              {/* Add to Cart */}
               <div className="pt-4 flex gap-3">
                 <button 
                   onClick={handleAddToCart}
@@ -338,7 +326,6 @@ const ProductDetail = () => {
                 </button>
               </div>
 
-              {/* Trust Badges */}
               <div className="pt-6 border-t border-cream-200 space-y-4">
                 <div className="flex items-center space-x-3 text-charcoal-500">
                   <Truck size={18} />

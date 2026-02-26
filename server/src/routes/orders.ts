@@ -4,16 +4,14 @@ import prisma from '../lib/prisma'
 
 const router = Router()
 
-// Generate order number
 const generateOrderNumber = () => {
   const timestamp = Date.now().toString(36).toUpperCase()
   const random = Math.random().toString(36).substring(2, 6).toUpperCase()
   return `LO-${timestamp}-${random}`
 }
 
-// Create new order
 router.post(
-  '/',
+  '/',,
   [
     body('items').isArray({ min: 1 }),
     body('items.*.productId').isString(),
@@ -38,13 +36,11 @@ router.post(
 
       const { items, shippingAddress, guestEmail, guestPhone } = req.body
 
-      // Fetch products to get prices
       const productIds = items.map((item: { productId: string }) => item.productId)
       const products = await prisma.product.findMany({
         where: { id: { in: productIds } }
       })
 
-      // Validate all products exist and are in stock
       for (const item of items) {
         const product = products.find(p => p.id === item.productId)
         if (!product) {
@@ -55,16 +51,14 @@ router.post(
         }
       }
 
-      // Calculate totals
       const subtotal = items.reduce((sum: number, item: { productId: string; quantity: number }) => {
         const product = products.find(p => p.id === item.productId)!
         return sum + (product.price * item.quantity)
       }, 0)
       
-      const shippingCost = subtotal >= 999 ? 0 : 99 // Free shipping above ₹999
+      const shippingCost = subtotal >= 999 ? 0 : 99
       const total = subtotal + shippingCost
 
-      // Create order with address
       const order = await prisma.order.create({
         data: {
           orderNumber: generateOrderNumber(),
@@ -112,7 +106,6 @@ router.post(
   }
 )
 
-// Get order by order number
 router.get(
   '/track/:orderNumber',
   [param('orderNumber').isString()],
@@ -140,7 +133,6 @@ router.get(
   }
 )
 
-// Get order by ID
 router.get('/:id', async (req: Request, res: Response) => {
   try {
     const order = await prisma.order.findUnique({
@@ -164,7 +156,6 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 })
 
-// Update order status (admin)
 router.patch(
   '/:id/status',
   [
@@ -191,7 +182,6 @@ router.patch(
   }
 )
 
-// Get all orders (admin)
 router.get('/', async (req: Request, res: Response) => {
   try {
     const { status, limit = '20', offset = '0' } = req.query

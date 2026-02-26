@@ -26,14 +26,12 @@ const ShippingReturns = () => {
   const [returnReason, setReturnReason] = useState('')
   const [returnSubmitted, setReturnSubmitted] = useState(false)
 
-  // Mock tracking search
   const handleTrackOrder = (e: React.FormEvent) => {
     e.preventDefault()
     if (!trackingId.trim()) return
 
     setIsSearching(true)
     
-    // Simulate API call
     setTimeout(() => {
       setTrackingResult({
         orderId: trackingId,
@@ -54,12 +52,10 @@ const ShippingReturns = () => {
     }, 1500)
   }
 
-  // Mock return request
   const handleReturnRequest = (e: React.FormEvent) => {
     e.preventDefault()
     if (!returnOrderId.trim() || !returnReason.trim()) return
 
-    // Simulate API call
     setTimeout(() => {
       setReturnSubmitted(true)
     }, 1000)
@@ -68,7 +64,6 @@ const ShippingReturns = () => {
   return (
     <div className="min-h-screen bg-cream-50 pt-4 pb-16">
       <div className="max-w-4xl mx-auto px-6 md:px-12">
-        {/* Back Link */}
         <Link 
           to="/" 
           className="inline-flex items-center gap-2 text-charcoal-400 hover:text-charcoal-600 transition-colors mb-8"
@@ -77,7 +72,6 @@ const ShippingReturns = () => {
           <span>Back to Home</span>
         </Link>
 
-        {/* Header */}
         <div className="mb-10">
           <h1 className="text-3xl md:text-4xl font-medium text-charcoal-700 mb-3">
             Shipping & Returns
@@ -87,7 +81,6 @@ const ShippingReturns = () => {
           </p>
         </div>
 
-        {/* Tab Navigation */}
         <div className="flex gap-2 mb-8 border-b border-cream-200">
           <button
             onClick={() => setActiveTab('track')}
@@ -124,10 +117,8 @@ const ShippingReturns = () => {
           </button>
         </div>
 
-        {/* Track Order Tab */}
         {activeTab === 'track' && (
           <div className="space-y-8">
-            {/* Search Form */}
             <div className="bg-cream-100 p-6 rounded-sm">
               <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                 Track Your Order
@@ -161,7 +152,6 @@ const ShippingReturns = () => {
               )}
             </div>
 
-            {/* Tracking Result */}
             {trackingResult && (
               <div className="bg-cream-100 p-6 rounded-sm">
                 <div className="flex items-start justify-between mb-6">
@@ -178,7 +168,6 @@ const ShippingReturns = () => {
                   </span>
                 </div>
 
-                {/* Current Location */}
                 <div className="flex items-center gap-3 p-4 bg-cream-50 rounded-sm mb-6">
                   <MapPin className="text-charcoal-500" size={20} />
                   <div>
@@ -191,7 +180,6 @@ const ShippingReturns = () => {
                   </div>
                 </div>
 
-                {/* Timeline */}
                 <div className="space-y-0">
                   {trackingResult.timeline.map((step, index) => (
                     <div key={index} className="flex gap-4">
@@ -231,7 +219,6 @@ const ShippingReturns = () => {
           </div>
         )}
 
-        {/* Return / Replace Tab */}
         {activeTab === 'return' && (
           <div className="space-y-8">
             {returnSubmitted ? (
@@ -259,7 +246,6 @@ const ShippingReturns = () => {
               </div>
             ) : (
               <>
-                {/* Return Policy Summary */}
                 <div className="bg-cream-100 p-6 rounded-sm">
                   <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                     Return & Replacement Policy
@@ -284,7 +270,6 @@ const ShippingReturns = () => {
                   </ul>
                 </div>
 
-                {/* Return Request Form */}
                 <div className="bg-cream-100 p-6 rounded-sm">
                   <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                     Request Return / Replacement
@@ -361,10 +346,8 @@ const ShippingReturns = () => {
           </div>
         )}
 
-        {/* Shipping Info Tab */}
         {activeTab === 'info' && (
           <div className="space-y-6">
-            {/* Delivery Info */}
             <div className="bg-cream-100 p-6 rounded-sm">
               <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                 Delivery Information
@@ -391,7 +374,6 @@ const ShippingReturns = () => {
               </div>
             </div>
 
-            {/* Shipping Partners */}
             <div className="bg-cream-100 p-6 rounded-sm">
               <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                 Our Shipping Partners
@@ -411,7 +393,6 @@ const ShippingReturns = () => {
               </div>
             </div>
 
-            {/* FAQs */}
             <div className="bg-cream-100 p-6 rounded-sm">
               <h2 className="text-lg font-medium text-charcoal-700 mb-4">
                 Frequently Asked Questions
@@ -452,7 +433,6 @@ const ShippingReturns = () => {
               </div>
             </div>
 
-            {/* Contact Support */}
             <div className="bg-charcoal-600 p-6 rounded-sm text-center">
               <h2 className="text-lg font-medium text-cream-50 mb-2">
                 Need Help?

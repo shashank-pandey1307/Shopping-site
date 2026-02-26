@@ -28,7 +28,6 @@ const ProductHighlight = () => {
     <section className="section bg-cream-100">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Product Image */}
           <div className="aspect-[4/5] bg-cream-200 rounded-sm overflow-hidden">
             <img 
               src="/images/WhatsApp Image 2025-12-19 at 10.06.49 AM.jpeg"
@@ -37,7 +36,6 @@ const ProductHighlight = () => {
             />
           </div>
 
-          {/* Content */}
           <div className="space-y-10">
             <div>
               <p className="text-xs font-medium text-charcoal-400 uppercase tracking-wider mb-3">
@@ -52,7 +50,6 @@ const ProductHighlight = () => {
               </p>
             </div>
 
-            {/* Features */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-start space-x-4">
@@ -71,7 +68,6 @@ const ProductHighlight = () => {
               ))}
             </div>
 
-            {/* Price & CTA */}
             <div className="flex items-center space-x-6">
               <span className="text-2xl font-medium text-charcoal-700">
                 ₹1,299

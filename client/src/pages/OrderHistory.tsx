@@ -99,7 +99,6 @@ const OrderHistory = () => {
     <div className="pt-20 min-h-screen bg-cream-50">
       <div className="section">
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
           <button 
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-700 transition-all duration-200 hover:scale-105 mb-6"
@@ -126,7 +125,6 @@ const OrderHistory = () => {
             <div className="space-y-4">
               {orders.map((order) => (
                 <div key={order.id} className="bg-white border border-cream-200 rounded-sm overflow-hidden">
-                  {/* Order Header */}
                   <button
                     onClick={() => setExpandedOrder(expandedOrder === order.id ? null : order.id)}
                     className="w-full p-4 md:p-6 flex items-center justify-between hover:bg-cream-50 transition-colors"
@@ -155,10 +153,8 @@ const OrderHistory = () => {
                     )}
                   </button>
 
-                  {/* Order Details */}
                   {expandedOrder === order.id && (
                     <div className="border-t border-cream-200 p-4 md:p-6 bg-cream-50">
-                      {/* Items */}
                       <div className="space-y-4 mb-6">
                         {order.items.map((item) => (
                           <div key={item.id} className="flex gap-4">
@@ -187,7 +183,6 @@ const OrderHistory = () => {
                         ))}
                       </div>
 
-                      {/* Shipping Address */}
                       <div className="pt-4 border-t border-cream-200">
                         <p className="text-xs text-charcoal-400 mb-1">Shipping Address</p>
                         <p className="text-sm text-charcoal-600">

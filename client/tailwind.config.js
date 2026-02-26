@@ -7,7 +7,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // lemonO brand colors - calm, minimal, neutral
         cream: {
           50: '#FEFDFB',
           100: '#FDF9F3',

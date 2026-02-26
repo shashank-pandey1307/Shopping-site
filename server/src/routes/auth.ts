@@ -5,12 +5,10 @@ import bcrypt from 'bcryptjs'
 const router = Router()
 const prisma = new PrismaClient()
 
-// Register user
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password } = req.body
 
-    // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email }
     })
@@ -19,10 +17,8 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'Email already registered' })
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    // Create user
     const user = await prisma.user.create({
       data: {
         name,
@@ -45,12 +41,10 @@ router.post('/register', async (req, res) => {
   }
 })
 
-// Login user
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body
 
-    // Find user
     const user = await prisma.user.findUnique({
       where: { email }
     })
@@ -59,12 +53,10 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid email or password' })
     }
 
-    // Check if user has password (might be Google user)
     if (!user.password) {
       return res.status(401).json({ error: 'Please login with Google' })
     }
 
-    // Verify password
     const isValidPassword = await bcrypt.compare(password, user.password)
 
     if (!isValidPassword) {
@@ -85,12 +77,10 @@ router.post('/login', async (req, res) => {
   }
 })
 
-// Google login/signup
 router.post('/google', async (req, res) => {
   try {
     const { name, email } = req.body
 
-    // Find or create user
     let user = await prisma.user.findUnique({
       where: { email }
     })
@@ -119,7 +109,6 @@ router.post('/google', async (req, res) => {
   }
 })
 
-// Get user profile
 router.get('/profile/:userId', async (req, res) => {
   try {
     const { userId } = req.params
@@ -146,7 +135,6 @@ router.get('/profile/:userId', async (req, res) => {
   }
 })
 
-// Get user orders
 router.get('/orders/:userId', async (req, res) => {
   try {
     const { userId } = req.params
@@ -171,7 +159,6 @@ router.get('/orders/:userId', async (req, res) => {
   }
 })
 
-// Get user favorites
 router.get('/favorites/:userId', async (req, res) => {
   try {
     const { userId } = req.params
@@ -183,7 +170,6 @@ router.get('/favorites/:userId', async (req, res) => {
       }
     })
 
-    // Get product details for each favorite
     const productIds = favorites.map(f => f.productId)
     const products = await prisma.product.findMany({
       where: { id: { in: productIds } }
@@ -196,7 +182,6 @@ router.get('/favorites/:userId', async (req, res) => {
   }
 })
 
-// Add to favorites
 router.post('/favorites', async (req, res) => {
   try {
     const { userId, productId } = req.body
@@ -218,7 +203,6 @@ router.post('/favorites', async (req, res) => {
   }
 })
 
-// Remove from favorites
 router.delete('/favorites/:userId/:productId', async (req, res) => {
   try {
     const { userId, productId } = req.params

@@ -1,7 +1,6 @@
 import ProductCard from './ProductCard'
 import { Product } from '../types'
 
-// Sample products data - will be replaced with API data
 const sampleProducts: Product[] = [
   {
     id: '1',
@@ -53,7 +52,6 @@ const FeaturedCollection = () => {
   return (
     <section className="section bg-cream-50">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-heading font-medium text-charcoal-700 mb-4">
             Featured Collection
@@ -63,14 +61,12 @@ const FeaturedCollection = () => {
           </p>
         </div>
 
-        {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
           {sampleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        {/* View All CTA */}
         <div className="text-center mt-16">
           <a href="/shop" className="btn-secondary">
             View All Products

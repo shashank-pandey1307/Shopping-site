@@ -27,7 +27,6 @@ const WhyLemonO = () => {
   return (
     <section className="section bg-cream-50">
       <div className="max-w-5xl mx-auto">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-heading font-medium text-charcoal-700 mb-4">
             Why lemonO
@@ -37,7 +36,6 @@ const WhyLemonO = () => {
           </p>
         </div>
 
-        {/* Trust Points Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {trustPoints.map((point, index) => (
             <div 

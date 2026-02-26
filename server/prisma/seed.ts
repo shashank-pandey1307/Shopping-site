@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-// Seed data for lemonO products
 const products = [
   {
     name: 'Essential Oversized Tee',
@@ -69,11 +68,9 @@ const products = [
 async function main() {
   console.log('🌱 Seeding database...')
 
-  // Clear existing products
   await prisma.product.deleteMany()
   console.log('Cleared existing products')
 
-  // Insert new products
   for (const product of products) {
     await prisma.product.create({
       data: product

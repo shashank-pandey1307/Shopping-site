@@ -4,14 +4,12 @@ import { ArrowLeft, CreditCard, Shield, CheckCircle, AlertCircle, Loader2 } from
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 
-// Declare Razorpay on window object for TypeScript
 declare global {
   interface Window {
     Razorpay: new (options: RazorpayOptions) => RazorpayInstance
   }
 }
 
-// Type definitions for Razorpay
 interface RazorpayOptions {
   key: string
   amount: number
@@ -49,17 +47,14 @@ const Checkout = () => {
   const { items, totalPrice, clearCart } = useCart()
   const { isLoggedIn } = useAuth()
   
-  // State management
   const [isLoading, setIsLoading] = useState(false)
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success' | 'failed'>('idle')
   const [paymentId, setPaymentId] = useState<string>('')
   const [error, setError] = useState<string>('')
 
-  // Calculate totals
   const shippingCost = totalPrice >= 999 ? 0 : 99
   const finalTotal = totalPrice + shippingCost
 
-  // Load Razorpay script dynamically
   useEffect(() => {
     const script = document.createElement('script')
     script.src = 'https://checkout.razorpay.com/v1/checkout.js'
@@ -67,12 +62,10 @@ const Checkout = () => {
     document.body.appendChild(script)
 
     return () => {
-      // Cleanup: remove script when component unmounts
       document.body.removeChild(script)
     }
   }, [])
 
-  // Redirect if not logged in or cart is empty
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/login', { 
@@ -84,25 +77,18 @@ const Checkout = () => {
     }
   }, [isLoggedIn, items.length, navigate, paymentStatus])
 
-  /**
-   * Handle the payment process
-   * 1. Create order on backend
-   * 2. Open Razorpay checkout
-   * 3. Verify payment after completion
-   */
   const handlePayment = async () => {
     setIsLoading(true)
     setError('')
 
     try {
-      // Step 1: Create order on your backend
       const orderResponse = await fetch('http://localhost:5000/api/payment/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          amount: finalTotal, // Amount in rupees
+          amount: finalTotal,
           currency: 'INR',
           receipt: `receipt_${Date.now()}`
         })
@@ -114,25 +100,23 @@ const Checkout = () => {
         throw new Error(orderData.error || 'Failed to create order')
       }
 
-      // Step 2: Configure Razorpay options
       const options: RazorpayOptions = {
-        key: orderData.key_id, // Your Razorpay Key ID (from backend)
-        amount: orderData.order.amount, // Amount in paise
+        key: orderData.key_id,
+        amount: orderData.order.amount,
         currency: orderData.order.currency,
         name: 'lemonO',
         description: 'Fashion Store Purchase',
-        order_id: orderData.order.id, // Order ID from Razorpay
+        order_id: orderData.order.id,
         handler: async function (response: RazorpayResponse) {
-          // Step 3: Verify payment on backend
           await verifyPayment(response)
         },
         prefill: {
-          name: 'Customer Name', // You can get this from user profile
+          name: 'Customer Name',
           email: 'customer@example.com',
           contact: '9999999999'
         },
         theme: {
-          color: '#4A4A4A' // Your brand color
+          color: '#4A4A4A'
         },
         modal: {
           ondismiss: function () {
@@ -142,7 +126,6 @@ const Checkout = () => {
         }
       }
 
-      // Step 3: Open Razorpay checkout
       const razorpay = new window.Razorpay(options)
       razorpay.open()
 
@@ -153,9 +136,6 @@ const Checkout = () => {
     }
   }
 
-  /**
-   * Verify payment signature on backend
-   */
   const verifyPayment = async (response: RazorpayResponse) => {
     try {
       const verifyResponse = await fetch('http://localhost:5000/api/payment/verify', {
@@ -173,10 +153,9 @@ const Checkout = () => {
       const verifyData = await verifyResponse.json()
 
       if (verifyData.success) {
-        // Payment successful!
         setPaymentStatus('success')
         setPaymentId(response.razorpay_payment_id)
-        clearCart() // Clear the cart after successful payment
+        clearCart()
       } else {
         throw new Error(verifyData.error || 'Payment verification failed')
       }
@@ -190,7 +169,6 @@ const Checkout = () => {
     }
   }
 
-  // Success Screen
   if (paymentStatus === 'success') {
     return (
       <div className="pt-20 min-h-screen bg-cream-50">
@@ -228,7 +206,6 @@ const Checkout = () => {
     )
   }
 
-  // Failed Screen
   if (paymentStatus === 'failed') {
     return (
       <div className="pt-20 min-h-screen bg-cream-50">
@@ -266,12 +243,10 @@ const Checkout = () => {
     )
   }
 
-  // Main Checkout Screen
   return (
     <div className="pt-20 min-h-screen bg-cream-50">
       <div className="section">
         <div className="max-w-4xl mx-auto">
-          {/* Go Back Button */}
           <button
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-700 transition-all duration-200 hover:scale-105 mb-6"
@@ -280,13 +255,11 @@ const Checkout = () => {
             Go Back
           </button>
 
-          {/* Header */}
           <h1 className="text-2xl md:text-3xl font-medium text-charcoal-700 mb-10">
             Checkout
           </h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Order Items Preview */}
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-cream-100 p-6 rounded-sm">
                 <h2 className="text-lg font-medium text-charcoal-700 mb-4">
@@ -321,7 +294,6 @@ const Checkout = () => {
                 </div>
               </div>
 
-              {/* Security Notice */}
               <div className="flex items-start gap-3 p-4 bg-green-50 rounded-sm">
                 <Shield size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
                 <div>
@@ -335,7 +307,6 @@ const Checkout = () => {
               </div>
             </div>
 
-            {/* Payment Summary */}
             <div className="lg:col-span-1">
               <div className="bg-cream-100 p-6 rounded-sm sticky top-28">
                 <h2 className="text-lg font-medium text-charcoal-700 mb-6">
@@ -357,14 +328,12 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                {/* Error Message */}
                 {error && (
                   <div className="mt-4 p-3 bg-red-50 rounded-sm">
                     <p className="text-sm text-red-600">{error}</p>
                   </div>
                 )}
 
-                {/* Pay Now Button */}
                 <button
                   onClick={handlePayment}
                   disabled={isLoading}

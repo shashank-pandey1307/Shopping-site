@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,15 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Product model for lemonO oversized tees
 model Product {
   id          String      @id @default(cuid())
   name        String
   description String
   price       Float
   color       String
-  sizes       String[]    // Available sizes
-  images      String[]    // Image URLs
+  sizes       String[]
+  images      String[]
   category    String
   inStock     Boolean     @default(true)
   createdAt   DateTime    @default(now())
@@ -29,14 +25,13 @@ model Product {
   @@map("products")
 }
 
-// User model (optional - for registered users)
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
   password  String?
   name      String?
   phone     String?
-  provider  String   @default("email") // email, google
+  provider  String   @default("email")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
@@ -47,7 +42,6 @@ model User {
   @@map("users")
 }
 
-// Favorites model
 model Favorite {
   id        String   @id @default(cuid())
   userId    String
@@ -59,7 +53,6 @@ model Favorite {
   @@map("favorites")
 }
 
-// Address model
 model Address {
   id        String   @id @default(cuid())
   name      String
@@ -79,7 +72,6 @@ model Address {
   @@map("addresses")
 }
 
-// Order model
 model Order {
   id              String      @id @default(cuid())
   orderNumber     String      @unique
@@ -88,11 +80,9 @@ model Order {
   shippingCost    Float       @default(0)
   total           Float
   
-  // Guest checkout fields
   guestEmail      String?
   guestPhone      String?
   
-  // Relations
   userId          String?
   user            User?       @relation(fields: [userId], references: [id])
   
@@ -107,12 +97,11 @@ model Order {
   @@map("orders")
 }
 
-// Order Item model
 model OrderItem {
   id        String  @id @default(cuid())
   quantity  Int
   size      String
-  price     Float   // Price at time of order
+  price     Float
   
   productId String
   product   Product @relation(fields: [productId], references: [id])
@@ -123,7 +112,6 @@ model OrderItem {
   @@map("order_items")
 }
 
-// Order status enum
 enum OrderStatus {
   PENDING
   CONFIRMED
@@ -133,7 +121,6 @@ enum OrderStatus {
   CANCELLED
 }
 
-// Contact message model
 model ContactMessage {
   id        String   @id @default(cuid())
   name      String
@@ -145,7 +132,6 @@ model ContactMessage {
   @@map("contact_messages")
 }
 
-// Newsletter subscription
 model NewsletterSubscription {
   id        String   @id @default(cuid())
   email     String   @unique

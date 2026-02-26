@@ -24,19 +24,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const addToCart = (product: Product, size: string, quantity: number) => {
     setItems(prevItems => {
-      // Check if item with same product and size exists
       const existingIndex = prevItems.findIndex(
         item => item.product.id === product.id && item.size === size
       )
 
       if (existingIndex >= 0) {
-        // Update quantity of existing item
         const newItems = [...prevItems]
         newItems[existingIndex].quantity += quantity
         return newItems
       }
 
-      // Add new item
       return [...prevItems, { product, size, quantity }]
     })
   }

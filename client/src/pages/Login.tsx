@@ -8,7 +8,6 @@ const Login = () => {
   const location = useLocation()
   const { login, loginWithGoogle, signup, isLoggedIn } = useAuth()
   
-  // Get redirect info from location state
   const from = (location.state as { from?: string })?.from || '/'
   const message = (location.state as { message?: string })?.message
   
@@ -22,7 +21,6 @@ const Login = () => {
     name: ''
   })
 
-  // Redirect if already logged in
   if (isLoggedIn) {
     navigate('/')
     return null
@@ -71,7 +69,6 @@ const Login = () => {
     <div className="pt-20 min-h-screen bg-cream-50">
       <div className="section">
         <div className="max-w-md mx-auto">
-          {/* Go Back Button */}
           <button 
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-700 transition-all duration-200 hover:scale-105 mb-6"
@@ -80,7 +77,6 @@ const Login = () => {
             Go Back
           </button>
 
-          {/* Header */}
           <div className="text-center mb-10">
             <Link to="/" className="text-3xl font-semibold text-charcoal-700 tracking-tight">
               lemonO
@@ -100,9 +96,7 @@ const Login = () => {
             )}
           </div>
 
-          {/* Form Card */}
           <div className="bg-cream-100 p-8 md:p-10 rounded-sm">
-            {/* Google Login */}
             <button
               onClick={handleGoogleLogin}
               className="w-full flex items-center justify-center space-x-3 px-6 py-3 border border-cream-300 bg-white text-charcoal-600 font-medium rounded-sm hover:bg-cream-50 transition-colors"
@@ -128,7 +122,6 @@ const Login = () => {
               <span>Continue with Google</span>
             </button>
 
-            {/* Divider */}
             <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-cream-300"></div>
@@ -138,9 +131,7 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Email/Password Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name field - only for signup */}
               {!isLogin && (
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-charcoal-600 mb-2">
@@ -159,7 +150,6 @@ const Login = () => {
                 </div>
               )}
 
-              {/* Email */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-charcoal-600 mb-2">
                   Email
@@ -179,7 +169,6 @@ const Login = () => {
                 </div>
               </div>
 
-              {/* Password */}
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-charcoal-600 mb-2">
                   Password
@@ -207,7 +196,6 @@ const Login = () => {
                 </div>
               </div>
 
-              {/* Forgot Password - only for login */}
               {isLogin && (
                 <div className="text-right">
                   <Link to="/forgot-password" className="text-sm text-charcoal-500 hover:text-charcoal-700 transition-colors">
@@ -216,7 +204,6 @@ const Login = () => {
                 </div>
               )}
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isLoading}
@@ -226,7 +213,6 @@ const Login = () => {
               </button>
             </form>
 
-            {/* Toggle Login/Signup */}
             <p className="mt-8 text-center text-sm text-charcoal-500">
               {isLogin ? "Don't have an account?" : 'Already have an account?'}
               <button
@@ -238,7 +224,6 @@ const Login = () => {
             </p>
           </div>
 
-          {/* Terms */}
           <p className="mt-6 text-center text-xs text-charcoal-400">
             By continuing, you agree to our{' '}
             <Link to="/terms" className="underline hover:text-charcoal-600">Terms of Service</Link>

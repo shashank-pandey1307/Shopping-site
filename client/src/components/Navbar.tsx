@@ -11,7 +11,6 @@ const Navbar = () => {
   const { user, isLoggedIn, logout } = useAuth()
   const profileRef = useRef<HTMLDivElement>(null)
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
@@ -22,7 +21,6 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Get user initials
   const getInitials = (name: string) => {
     return name
       .split(' ')
@@ -36,12 +34,10 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-cream-50/70 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
           <Link to="/" className="text-2xl font-semibold text-charcoal-700 tracking-tight">
             lemonO
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-12">
             <Link 
               to="/shop" 
@@ -63,7 +59,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Cart & Profile & Mobile Menu */}
           <div className="flex items-center space-x-2">
             <Link 
               to="/cart"
@@ -78,7 +73,6 @@ const Navbar = () => {
               )}
             </Link>
             
-            {/* Profile Dropdown */}
             <div className="relative" ref={profileRef}>
               {isLoggedIn ? (
                 <>
@@ -90,7 +84,6 @@ const Navbar = () => {
                     {user?.name ? getInitials(user.name) : 'U'}
                   </button>
                   
-                  {/* Dropdown Menu */}
                   {isProfileOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-sm shadow-lg border border-cream-200 py-2 z-50">
                       <div className="px-4 py-2 border-b border-cream-200">
@@ -137,7 +130,6 @@ const Navbar = () => {
               )}
             </div>
             
-            {/* Mobile Menu Button */}
             <button 
               className="md:hidden p-2 text-charcoal-500 hover:text-charcoal-700 transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -148,7 +140,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-cream-50 border-t border-cream-200">
           <div className="px-6 py-6 space-y-4">

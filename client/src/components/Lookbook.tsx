@@ -31,7 +31,6 @@ const lookbookImages = [
 const Lookbook = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  // Auto-slide every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % lookbookImages.length)
@@ -42,7 +41,6 @@ const Lookbook = () => {
   return (
     <section className="section-sm bg-cream-100">
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
         <div className="mb-12">
           <h2 className="text-3xl md:text-heading font-medium text-charcoal-700 mb-4">
             Lookbook
@@ -52,7 +50,6 @@ const Lookbook = () => {
           </p>
         </div>
 
-        {/* Horizontal Gallery with Auto-slide */}
         <div className="relative overflow-hidden -mx-6 px-6">
           <div 
             className="flex space-x-4 md:space-x-6 transition-transform duration-700 ease-in-out"
@@ -73,7 +70,6 @@ const Lookbook = () => {
           </div>
         </div>
 
-        {/* Dot Indicators */}
         <div className="flex justify-center gap-2 mt-6">
           {lookbookImages.map((_, index) => (
             <button
